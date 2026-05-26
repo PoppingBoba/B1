@@ -6,6 +6,7 @@
  * https://opensource.org/licenses/MIT
  */
 #include "app.h"
+#include "app_objc.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -34,6 +35,8 @@ void apps_init(void) {
             start_app(app, true);
         }
     }
+
+    test_objc_call();
 }
 
 static int app_thread_entry(void *arg) {

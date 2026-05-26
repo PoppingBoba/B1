@@ -45,6 +45,8 @@ static void call_constructors(void) {
     }
 }
 
+extern void resolve_all_classes(void);
+
 // Main C entry point of the system, called from arch code on the boot cpu.
 void lk_main(ulong arg0, ulong arg1, ulong arg2, ulong arg3) {
     // save the boot args
@@ -84,6 +86,7 @@ void lk_main(ulong arg0, ulong arg1, ulong arg2, ulong arg3) {
     // deal with any static constructors
     dprintf(SPEW, "calling constructors\n");
     call_constructors();
+    resolve_all_classes();
 
     // initialize the kernel
     lk_primary_cpu_init_level(LK_INIT_LEVEL_HEAP, LK_INIT_LEVEL_KERNEL - 1);
