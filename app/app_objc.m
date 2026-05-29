@@ -21,6 +21,7 @@
 
 - (void)setValue:(int)v
 {
+    printf("HEN::-> Value Setting : %d\r\n", v);
     value = v;
 }
 @end

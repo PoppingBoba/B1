@@ -1,4 +1,4 @@
-#include <objc.h>
+#include <objc/objc.h>
 
 #include <string.h>
 
@@ -70,6 +70,11 @@ struct objc_module {
 
 static Class g_classes[OBJC_MAX_CLASSES];
 static uint32_t g_class_count = 0;
+
+extern "C" 
+{
+void resolve_all_classes(void);
+}
 
 
 static id objc_nil_method(id self, SEL _cmd, ...)
@@ -188,7 +193,7 @@ static void resolve_class(Class cls)
         }
         else if (!is_registered_class(meta->super_class))
         {
-            const char* super_name = meta->super_class;
+            const char* super_name = reinterpret_cast<char*>(meta->super_class);
             Class s = find_class_by_name(super_name);
             meta->super_class = s ? s->isa : 0;
         }

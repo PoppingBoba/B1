@@ -1,4 +1,4 @@
-#include <objc.h>
+#include <objc/objc.h>
 
 __attribute__((objc_root_class))
 @interface Object
@@ -40,12 +40,12 @@ __attribute__((objc_root_class))
     if (o->rc && --o->rc == 0)
     {
         [self dealloc];
-        objc_dealloc_object(self);
     }
 }
 
 - (void)dealloc
 {
+    objc_dealloc_object(self);
 }
 
 @end

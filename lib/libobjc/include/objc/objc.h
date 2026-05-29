@@ -6,6 +6,10 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef signed char BOOL;
 
 #define YES ((BOOL)1)
@@ -42,5 +46,9 @@ void __objc_exec_class(void* module, ...);
 
 id objc_alloc_object(Class cls);
 void objc_dealloc_object(id obj);
+
+#ifdef __cplusplus
+};
+#endif
 
 #endif
