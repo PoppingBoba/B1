@@ -102,9 +102,25 @@ GLOBAL_COMPILEFLAGS += -fno-common
 # rely on all hosted environment functionality being present.
 GLOBAL_COMPILEFLAGS += -ffreestanding
 GLOBAL_CFLAGS := --std=gnu11 -Werror-implicit-function-declaration -Wstrict-prototypes -Wwrite-strings
-GLOBAL_CPPFLAGS := --std=c++14 -fno-exceptions -fno-rtti -fno-threadsafe-statics
+GLOBAL_CPPFLAGS := --std=c++26 -fno-exceptions -fno-rtti -fno-threadsafe-statics
 GLOBAL_ASMFLAGS := -DASSEMBLY
 GLOBAL_LDFLAGS :=
+
+################## clangd DB ##################
+
+COMPILE_DB_DIR := $(BUILDDIR)/compile_db
+
+ifeq ($(GENERATE_COMPILE_DB),1)
+COMPILE_DB_FLAGS = -MJ $(COMPILE_DB_DIR)/$@.json
+COMPILE_DB := $(LKROOT)/compile_commands.json
+COMPILEDB = python3 scripts/gen_compile_commands.py $(COMPILE_DB_DIR) $(COMPILE_DB)
+else
+COMPILE_DB_FLAGS =
+COMPILE_DB :=
+COMPILEDB =
+endif
+
+################## clangd DB ##################
 
 ifeq ($(UBSAN), 1)
 # Inject lib/ubsan directly into MODULE_DEPS

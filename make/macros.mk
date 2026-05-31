@@ -6,6 +6,7 @@ GET_LOCAL_DIR    = $(patsubst %/,%,$(dir $(word $(words $(MAKEFILE_LIST)),$(MAKE
 
 # makes sure the target dir exists
 MKDIR = if [ ! -d $(dir $@) ]; then mkdir -p $(dir $@); fi
+MKDIR_COMPILE_DB = if [ ! -d $(dir $(COMPILE_DB_DIR)/$@.json) ]; then mkdir -p $(dir $(COMPILE_DB_DIR)/$@.json); fi
 
 # prepends the BUILD_DIR var to each item in the list
 TOBUILDDIR = $(addprefix $(BUILDDIR)/,$(1))
