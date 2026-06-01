@@ -1,5 +1,5 @@
 #include "app_objc.h"
-#include <object.h>
+#include <objc/Object.h>
 
 #include <stdio.h>
 
@@ -26,7 +26,7 @@
 }
 @end
 
-void test_objc_call()
+void test_objc_call(void)
 {
     printf("HEN::-> test_objc_call entered...\r\n");
 
