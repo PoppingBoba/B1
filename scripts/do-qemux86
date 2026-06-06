@@ -188,6 +188,6 @@ if (( DO_DRYRUN )); then
     exit 0
 fi
 
-"$DIR"/make-parallel $PROJECT &&
+#"$DIR"/make-parallel $PROJECT &&
 echo "${CMD[@]}" &&
 exec "${CMD[@]}"
