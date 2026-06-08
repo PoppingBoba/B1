@@ -9,6 +9,7 @@ MODULE_DEPS := 	\
 
 MODULE_SRCS += \
 	$(LOCAL_DIR)/objc_runtime.cc \
+	$(LOCAL_DIR)/objc_runtime_autorelease.mm \
 	$(LOCAL_DIR)/Object.m
 
 include make/module.mk

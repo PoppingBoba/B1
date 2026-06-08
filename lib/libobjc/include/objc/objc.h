@@ -48,9 +48,7 @@ id objc_alloc_object(Class cls);
 void objc_dealloc_object(id obj);
 
 // ======================= Autorelease =======================
-void* objc_autorealeasePoolPush(void);
 id objc_autorelease(id obj);
-void objc_autorealeasePoolPop(void* token);
 // ======================= Autorelease =======================
 
 #ifdef __cplusplus

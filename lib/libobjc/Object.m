@@ -13,6 +13,7 @@ __attribute__((objc_root_class))
 - (id)retain;
 - (void)release;
 - (void)dealloc;
+- (id)autorelease;
 @end
 
 @implementation Object
@@ -46,6 +47,12 @@ __attribute__((objc_root_class))
 - (void)dealloc
 {
     objc_dealloc_object(self);
+}
+
+- (id)autorelease 
+{
+    objc_autorelease(self);
+    return self;
 }
 
 @end

@@ -39,4 +39,8 @@ void test_objc_call(void)
     printf("HEN::-> It's now [t value] is %d\r\n", v);
 
     [t release];
+
+    @autoreleasepool {
+        printf("Hello Auto Release...\r\n");
+    }
 }
