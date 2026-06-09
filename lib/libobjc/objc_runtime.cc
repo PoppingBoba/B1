@@ -44,6 +44,7 @@ static IMP find_method(Class cls, SEL sel)
             {
                 if (!strcmp(method.name, name))
                 {
+                    // printf("Success to find Method!!! %s\r\n", method.name);
                     return method.imp;
                 }
             }

@@ -29,18 +29,15 @@
 void test_objc_call(void)
 {
     printf("HEN::-> test_objc_call entered...\r\n");
-
-    Test* t = [[Test alloc] init];
-
-    [t setValue: 30];
-
-    int v = [t value];
-
-    printf("HEN::-> It's now [t value] is %d\r\n", v);
-
-    [t release];
-
     @autoreleasepool {
-        printf("Hello Auto Release...\r\n");
+        Test* t = [[[Test alloc] init] autorelease];
+        Test* t2 = [[[Test alloc] init] autorelease];
+
+        [t setValue: 30];
+        [t2 setValue: 20];
+
+        int v = [t value];
+
+        printf("HEN::-> It's now [t value] is %d\r\n", v);
     }
 }
