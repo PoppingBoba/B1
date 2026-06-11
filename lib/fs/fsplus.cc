@@ -7,5 +7,19 @@
  * https://opensource.org/licenses/MIT
  */
 
+ 
+#include <lk/compiler.h>
+#include <lib/fs.h>
 #include <lib/fsplus.h>
 
+extern "C" FileSystemMetaClass* __start_fsplus_meta[] __WEAK;
+extern "C" FileSystemMetaClass* __stop_fsplus_meta[] __WEAK;
+
+extern "C" void fsplus_dump_list() 
+{
+    auto metaListStart = __start_fsplus_meta;
+    for (; metaListStart != __stop_fsplus_meta; metaListStart++)
+    {
+
+    }
+}

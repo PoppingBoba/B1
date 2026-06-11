@@ -9,6 +9,7 @@ struct fscookie;
 struct filecookie;
 struct dircookie;
 struct file_stat;
+struct fs_stat;
 
 class FileSystemClass
 {
@@ -73,7 +74,7 @@ public:
         return 0;
     }
 
-    virtual status_t mkdir(fscookie *, const char *)
+    virtual status_t MkDir(fscookie *, const char *)
     {
         return 0;
     }
@@ -83,7 +84,7 @@ public:
         return 0;
     }
 
-    virtual status_t readdir(dircookie *, struct dirent *)
+    virtual status_t ReadDir(dircookie *, struct dirent *)
     {
         return 0;
     }
@@ -98,5 +99,38 @@ public:
         return 0;
     }
 };
+
+class FileSystemMetaClass
+{
+    const char* name;
+public:
+    explicit FileSystemMetaClass(const char* name) : name(name) {}
+
+    virtual FileSystemClass* Alloc()
+    {
+        return nullptr;
+    }
+
+    const char* Name() const
+    {
+        return name;
+    }
+};
+
+#define DefineFileSystemMetaClass()                                     \
+public:                                                                 \
+    class MetaClass : public FileSystemMetaClass                        \
+    {                                                                   \
+    public:                                                             \
+        MetaClass();                                                    \
+        virtual FileSystemClass* Alloc();                               \
+    };                                                                  \
+    static MetaClass gMetaClass                                                 
+
+#define DeclareFileSystem(FSNAME, FSCLASS)                                \
+    FSCLASS::MetaClass::MetaClass() : FileSystemMetaClass(FSNAME) {}      \
+    FileSystemClass* FSCLASS::MetaClass::Alloc() { return new FSCLASS; }  \
+    FSCLASS::MetaClass FSCLASS::gMetaClass __SECTION("fsplus_meta");      
+
 
 #endif
